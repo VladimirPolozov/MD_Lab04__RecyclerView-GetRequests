@@ -5,14 +5,17 @@
     android:layout_height="match_parent">
 
     <View
+        android:id="@+id/viewOfRecyclerView"
         android:layout_width="50dp"
         android:layout_height="50dp"
         tools:ignore="MissingConstraints">
     </View>
     <TextView
+        android:id="@+id/textViewOfRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center"
+        android:textAlignment="center"
         tools:ignore="MissingConstraints">
     </TextView>
 
