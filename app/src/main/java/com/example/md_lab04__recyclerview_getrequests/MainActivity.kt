@@ -12,7 +12,7 @@ import java.net.URL
 
 
 class MainActivity : AppCompatActivity() {
-    private val TAG = "Testing HTTPUrlConnection"
+    private val TAG = "Flickr cats"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
