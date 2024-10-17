@@ -6,17 +6,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Recycler
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), CellClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -30,12 +29,12 @@ class MainActivity : AppCompatActivity() {
         val recyclerView: RecyclerView = findViewById(R.id.rView)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = Adapter(this, fetchList())
+        recyclerView.adapter = Adapter(this, fetchList(), this)
     }
 
     private fun fetchList(): ArrayList<ColorData> {
         val colorNames = listOf("Красный", "Алый", "Кораллово-красный", "Люминесцентный красный", "Кармин")
-        var colorHexes = listOf("ff0000", "FF2400", "B32821", "F80000", "960018")
+        val colorHexes = listOf("ff0000", "FF2400", "B32821", "F80000", "960018")
         val list = arrayListOf<ColorData>()
 
         for (i in 0..colorNames.size) {
@@ -45,13 +44,19 @@ class MainActivity : AppCompatActivity() {
         return list
     }
 
+    override fun onCellClickListener(data: ColorData) {
+        Toast.makeText(this,"$data Cell clicked", Toast.LENGTH_SHORT).show()
+    }
+
     data class ColorData (
         val colorName: String,
         val colorHex: Int
     )
 
     class Adapter(private val context: Context,
-                  private val list: ArrayList<ColorData>) : RecyclerView.Adapter<Adapter.ViewHolder>() {
+                  private val list: ArrayList<ColorData>,
+                  private val cellClickListener: CellClickListener
+    ) : RecyclerView.Adapter<Adapter.ViewHolder>() {
 
         class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
             val colorName: TextView = view.findViewById(R.id.textViewOfRecyclerView)
@@ -71,6 +76,14 @@ class MainActivity : AppCompatActivity() {
             val data = list[position]
             holder.colorHex.setBackgroundColor(data.colorHex)
             holder.colorName.text = data.colorName
+
+            holder.itemView.setOnClickListener {
+                cellClickListener.onCellClickListener(data)
+            }
         }
     }
+}
+
+interface CellClickListener {
+    fun onCellClickListener(data: MainActivity.ColorData)
 }
