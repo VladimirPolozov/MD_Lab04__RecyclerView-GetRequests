@@ -36,9 +36,5 @@ class MainActivity : AppCompatActivity() {
                 urlConnection.disconnect()
             }
         }
-
-        getViaOkHttpButton.setOnClickListener {
-
-        }
     }
 }
