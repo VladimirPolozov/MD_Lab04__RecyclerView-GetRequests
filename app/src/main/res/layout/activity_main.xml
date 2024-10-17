@@ -9,6 +9,13 @@
     tools:context=".MainActivity">
 
     <Button
+        android:id="@+id/buttonOkHTTP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get via OkHTTP" >
+    </Button>
+
+    <Button
         android:id="@+id/buttonHTTP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

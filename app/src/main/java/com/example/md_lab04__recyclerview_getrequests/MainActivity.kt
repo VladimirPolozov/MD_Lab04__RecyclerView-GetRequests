@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         val url = URL("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=ff49fcd4d4a08aa6aafb6ea3de826464&tags=cat&format=json&nojsoncallback=1")
         val urlConnection = url.openConnection() as HttpURLConnection
         val getViaHttpButton: Button = findViewById(R.id.buttonHTTP)
+        val getViaOkHttpButton: Button = findViewById(R.id.buttonOkHTTP)
 
         getViaHttpButton.setOnClickListener {
             try {
@@ -34,6 +35,10 @@ class MainActivity : AppCompatActivity() {
             } finally {
                 urlConnection.disconnect()
             }
+        }
+
+        getViaOkHttpButton.setOnClickListener {
+
         }
     }
 }
