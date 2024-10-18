@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -14,7 +13,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Recycler
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,10 +33,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun fetchList(): ArrayList<ColorData> {
         val colorNames = listOf("Красный", "Алый", "Кораллово-красный", "Люминесцентный красный", "Кармин")
-        var colorHexes = listOf("ff0000", "FF2400", "B32821", "F80000", "960018")
+        var colorHexes = listOf("#FF0000", "#FF2400", "#B32821", "#F80000", "#960018")
         val list = arrayListOf<ColorData>()
 
-        for (i in 0..colorNames.size) {
+        for (i in colorNames.indices) {
             val model = ColorData(colorNames[i], Color.parseColor(colorHexes[i]))
             list.add(model)
         }
