@@ -23,18 +23,17 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-        val connection = URL("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=ff49fcd4d4a08aa6aafb6ea3de826464&tags=cat&format=json&nojsoncallback=1").openConnection() as HttpURLConnection
         val getViaHttpButton: Button = findViewById(R.id.buttonHTTP)
 
         getViaHttpButton.setOnClickListener {
             thread {
+                val url = URL("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=ff49fcd4d4a08aa6aafb6ea3de826464&tags=cat&format=json&nojsoncallback=1")
+                val urlConnection = url.openConnection() as HttpURLConnection
                 try {
-                    val data = connection.inputStream.bufferedReader().use { it.readText() }
+                    val data = urlConnection.inputStream.bufferedReader().readText()
                     Log.d(TAG, data) // d - отладка (debug)
-                    connection.disconnect()
                 } finally {
-                    connection.disconnect()
+                    urlConnection.disconnect()
                 }
             }
         }
