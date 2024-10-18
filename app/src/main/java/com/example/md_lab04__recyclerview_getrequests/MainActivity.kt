@@ -9,6 +9,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import java.net.HttpURLConnection
 import java.net.URL
+import kotlin.concurrent.thread
 
 
 class MainActivity : AppCompatActivity() {
@@ -23,16 +24,18 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val url = URL("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=ff49fcd4d4a08aa6aafb6ea3de826464&tags=cat&format=json&nojsoncallback=1")
-        val urlConnection = url.openConnection() as HttpURLConnection
+        val connection = URL("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=ff49fcd4d4a08aa6aafb6ea3de826464&tags=cat&format=json&nojsoncallback=1").openConnection() as HttpURLConnection
         val getViaHttpButton: Button = findViewById(R.id.buttonHTTP)
 
         getViaHttpButton.setOnClickListener {
-            try {
-                val data = urlConnection.inputStream.bufferedReader().readText()
-                Log.d(TAG, data) // d - отладка (debug)
-            } finally {
-                urlConnection.disconnect()
+            thread {
+                try {
+                    val data = connection.inputStream.bufferedReader().use { it.readText() }
+                    Log.d(TAG, data) // d - отладка (debug)
+                    connection.disconnect()
+                } finally {
+                    connection.disconnect()
+                }
             }
         }
     }
