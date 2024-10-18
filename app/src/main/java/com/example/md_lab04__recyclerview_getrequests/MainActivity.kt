@@ -2,6 +2,7 @@ package com.example.md_lab04__recyclerview_getrequests
 
 import android.content.Context
 import android.graphics.Color
+import android.icu.lang.UCharacter.toLowerCase
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -34,10 +35,10 @@ class MainActivity : AppCompatActivity(), CellClickListener {
 
     private fun fetchList(): ArrayList<ColorData> {
         val colorNames = listOf("Красный", "Алый", "Кораллово-красный", "Люминесцентный красный", "Кармин")
-        val colorHexes = listOf("ff0000", "FF2400", "B32821", "F80000", "960018")
+        val colorHexes = listOf("#FF0000", "#FF2400", "#B32821", "#F80000", "#960018")
         val list = arrayListOf<ColorData>()
 
-        for (i in 0..colorNames.size) {
+        for (i in colorNames.indices) {
             val model = ColorData(colorNames[i], Color.parseColor(colorHexes[i]))
             list.add(model)
         }
@@ -45,7 +46,7 @@ class MainActivity : AppCompatActivity(), CellClickListener {
     }
 
     override fun onCellClickListener(data: ColorData) {
-        Toast.makeText(this,"$data Cell clicked", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this,"Это ${toLowerCase(data.colorName)}", Toast.LENGTH_SHORT).show()
     }
 
     data class ColorData (
