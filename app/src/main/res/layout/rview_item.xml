@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <View
+        android:id="@+id/viewOfRecyclerView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        tools:ignore="MissingConstraints">
+    </View>
+    <TextView
+        android:id="@+id/textViewOfRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:textAlignment="center"
+        tools:ignore="MissingConstraints">
+    </TextView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
